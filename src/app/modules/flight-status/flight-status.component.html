@@ -1,0 +1,40 @@
+<div class="rightSide">
+
+    <div class="selects">
+        <h1>באפשרותך לבצע חיפוש על ידי בחירה באחת או יותר מהאפשרויות הבאות</h1>
+        <input type="text" id="countriesSelect" class="select" list="countries"
+            (input)="inputChangeDestinations($event.target.value) ">
+        <datalist id="countries">
+        </datalist>
+        <div>
+            <select id="statuses" class="select" (change)="listStatusChanged($event.target.value)"></select>
+        </div>
+    </div>
+</div>
+<div>
+    <table *ngFor="let country of this.countries">
+        <tr>
+
+            <div class="cardRapper">
+
+                <mat-card class="cardRapper" [style.background-color]="getBackgroundColor(country)">
+                    <mat-card-title>
+                        <div class="title"> {{country ? country.destination : null}}</div>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <h1>{{country ? country.country_status : null}}</h1>
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                        <h2 [innerHTML]="country ? country.guidance.replace('<a','<a target=blank') : null">
+                        </h2>
+                        <h2 [innerHTML]="country ? country.more_info.replace('<a','<a target=blank') : null">
+                        </h2>
+                        <div [innerHTML]="country ? country.image : null"></div>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </tr>
+    </table>
+</div>
